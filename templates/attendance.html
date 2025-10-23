@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+
+{% block title %}Mark Attendance - Smart Attendance{% endblock %}
+
+{% block header %}Mark Attendance{% endblock %}
+
+{% block content %}
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+    
+    <div class="md:col-span-2 bg-white p-6 rounded-lg shadow">
+        <h3 class="text-xl font-semibold text-gray-800 mb-4">Live Camera Feed</h3>
+        <div class="mb-4 flex space-x-2">
+            <button id="start-cam" class="px-4 py-2 bg-green-600 text-white rounded-md hover:bg-green-700">
+                Start Camera
+            </button>
+            <button id="stop-cam" class="px-4 py-2 bg-red-600 text-white rounded-md hover:bg-red-700" disabled>
+                Stop Camera
+            </button>
+        </div>
+        
+        <div class="relative bg-gray-900 border-4 border-gray-300 rounded-lg overflow-hidden" style="padding-bottom: 75%;"> <video id="webcam" autoplay playsinline class="absolute top-0 left-0 w-full h-full object-cover hidden"></video>
+            
+            <canvas id="canvas" class="absolute top-0 left-0 w-full h-full"></canvas>
+
+            <div id="cam-placeholder" class="absolute inset-0 flex items-center justify-center">
+                <p class="text-gray-400 text-lg">Camera is off</p>
+            </div>
+        </div>
+        <p class="text-sm text-gray-500 mt-2">
+            Note: Recognition and attendance marking happens automatically.
+        </p>
+    </div>
+
+    <div class="md:col-span-1 bg-white p-6 rounded-lg shadow">
+        
+        <h3 class="text-xl font-semibold text-gray-800 mb-4">Marked Today ({{ today.strftime("%Y-%m-%d") }})</h3>
+        
+        <ul id="attendance-list" class="space-y-2 h-96 overflow-y-auto">
+            <li class="text-gray-500">Camera is off. Start camera to load attendance.</li>
+            </ul>
+    </div>
+</div>
+{% endblock %}
